@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <script src="AoC_07_2017.js"></script>
+        <style>
+            body {
+                margin:0;
+                background: url("https://t3.ftcdn.net/jpg/02/26/46/78/360_F_226467864_zTULeASdRpuMjCuassEWLvlLlvqsU8fK.jpg");
+            }
+            header {
+                width:100%;
+                background-color: rgb(35, 0, 0);
+                text-align: center;
+                color: white;
+                border-bottom: 5px solid darkgreen;
+                padding: 30px;
+            }
+
+            main {
+                margin: 100px auto;
+                width: 500px;
+                background-color: rgb(35, 0, 0);
+                text-align: center;
+                color: white;
+                border: 5px solid darkgreen;
+                padding: 30px;
+            }
+
+            textarea {
+                resize: none;
+                width: 100%;
+                height: 250px;
+                border: 2px solid rgb(132, 0, 0);
+                transition: all 0.2s;
+            }
+
+            textarea:focus {
+                border: 4px solid rgb(132, 0, 0);
+                outline: none;
+            }
+
+            button {
+                padding: 5px 20px;
+                transition: all 0.2s;
+            }
+
+            button:hover {
+                padding: 5px 22px;
+            }
+        </style>
+    </head>
+    <body>
+        <header> <h1>Advent of Code 2017</h1></header>
+        <main>
+            <textarea id="invoer" placeholder="Invoer"></textarea><br />
+            <button id="knop" onclick="in_uit_voer()">Submit</button><br /><br />
+    
+            Output:<p id="output"></p>
+        </main>
+    </body>
+</html>
