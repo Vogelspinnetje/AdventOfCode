@@ -1,28 +1,28 @@
+def check_report(invoer: list[int]) -> bool:
+    if sorted(invoer) not in [invoer, invoer[::-1]]:
+            return False
+
+    for huidige, volgende in zip(invoer, invoer[1:]):
+        if abs(huidige - volgende) <= 0 or abs(huidige - volgende) > 3:
+             return False
+
+    return True
+
+
 def AoC_02_2024(datastream: list[list[int]]) -> tuple[int, int]:
-    foute_reports: int = 0
+    goede_reports: int = 0
+    goede_reports2: int = 0
 
     for reports in datastream:
-        oplopend: bool = True if reports[0] < reports[-1] else False
-        for positie, code in enumerate(reports):
-            if positie == 0:
-                continue
-            
-            verschil: int = abs(code - reports[positie-1])
-            if oplopend and code < reports[positie-1]:
-                foute_reports += 1
-                break
-            
-            if not oplopend and code > reports[positie-1]:
-                foute_reports += 1
+        if check_report(reports):
+             goede_reports += 1
+
+        for codes in range(len(reports)):
+            if check_report(reports[:codes]+reports[codes+1:]):
+                goede_reports2 += 1
                 break
 
-            if verschil == 0 or verschil > 3:
-                foute_reports += 1
-                break
-    
-    goede_reports: int = len(datastream) - foute_reports
-
-    return goede_reports, 0
+    return goede_reports, goede_reports2
 
 
 if __name__ == "__main__":
