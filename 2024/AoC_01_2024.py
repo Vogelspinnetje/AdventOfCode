@@ -15,7 +15,7 @@ if __name__ == "__main__":
     invoerL: list[int] = []
     invoerR: list[int] = []
 
-    with open("AoC_01_2024.txt", "r") as fh:
+    with open("2024/AoC_01_2024.txt", "r") as fh:
         for regels in fh:
             invoerL.append(int(regels.split("   ")[0].strip()))
             invoerR.append(int(regels.split("   ")[1].strip()))
