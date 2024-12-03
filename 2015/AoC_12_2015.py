@@ -1,15 +1,22 @@
 import re
+import json
 
 def AoC_12_2015(datastream: list[str]) -> tuple[int, int]:
     antwoord: int = 0
-
-    getallen: list[str] = re.findall(r"-*\d{1,}", datastream)
+    antwoord2: int = 0
+    getallen: list[str] = re.findall(r"-?\d+", datastream)
 
     for getal in getallen:
         antwoord += int(getal)
 
+    json_data = str(json.loads(datastream, object_hook=lambda obj: {} if "red" in obj.values() else obj))
 
-    return antwoord,0 
+    getallen2: list[str] = re.findall(r"-?\d+", json_data)
+
+    for getal in getallen2:
+        antwoord2 += int(getal)
+
+    return antwoord, antwoord2
 
 
 if __name__ == "__main__":
