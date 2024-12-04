@@ -1,6 +1,8 @@
 def AoC_04_2024(datastream: list) -> tuple[int, int]:
     antwoord: int = 0
+    antwoord2: int = 0
 
+    # Deel 1
     for y, rij in enumerate(datastream):
         for x, kolom in enumerate(rij):
             if kolom != "X":
@@ -28,7 +30,17 @@ def AoC_04_2024(datastream: list) -> tuple[int, int]:
             if x >= 3 and y <= len(datastream) - 4 and datastream[y+1][x-1] == "M" and datastream[y+2][x-2] == "A" and datastream[y+3][x-3] == "S":
                 antwoord += 1
 
-    return antwoord,0
+    for y, rij in enumerate(datastream):
+        x_mas: dict = {"M": "S", "S": "M", "X": "_", "A": "_"}
+
+        for x, kolom in enumerate(rij):
+            if kolom != "A":
+                continue
+
+            if  1 <= x <= len(rij) - 2 and 1 <= y <= len(datastream) -2 and x_mas[datastream[y-1][x-1]] == datastream[y+1][x+1] and x_mas[datastream[y+1][x-1]] == datastream[y-1][x+1]:
+                antwoord2 += 1
+
+    return antwoord, antwoord2
 
 
 if __name__ == "__main__":
