@@ -42,7 +42,7 @@ def AoC_11_2015(datastream: list[str]) -> str:
     return ""
 
 if __name__ == "__main__":
-    with open("AoC_11_2015.txt", "r") as fh:
+    with open("2015/AoC_11_2015.txt", "r") as fh:
         invoer = fh.read().strip()
 
     print(AoC_11_2015(list(invoer)))
