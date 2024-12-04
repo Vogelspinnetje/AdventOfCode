@@ -1,4 +1,4 @@
-def AoC_04_2024(datastream: list) -> tuple[int, int]:
+def AoC_04_2024(datastream: list[list[str]]) -> tuple[int, int]:
     antwoord: int = 0
     antwoord2: int = 0
 
@@ -30,6 +30,7 @@ def AoC_04_2024(datastream: list) -> tuple[int, int]:
             if x >= 3 and y <= len(datastream) - 4 and datastream[y+1][x-1] == "M" and datastream[y+2][x-2] == "A" and datastream[y+3][x-3] == "S":
                 antwoord += 1
 
+    # Deel 2
     for y, rij in enumerate(datastream):
         x_mas: dict = {"M": "S", "S": "M", "X": "_", "A": "_"}
 
@@ -45,6 +46,6 @@ def AoC_04_2024(datastream: list) -> tuple[int, int]:
 
 if __name__ == "__main__":
     with open("2024/AoC_04_2024.txt", "r") as fh:
-        invoer = [list(regels.strip()) for regels in fh]
+        invoer: list[list[str]] = [list(regels.strip()) for regels in fh]
 
     print(AoC_04_2024(invoer))
