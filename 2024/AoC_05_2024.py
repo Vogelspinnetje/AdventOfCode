@@ -1,4 +1,7 @@
 def data_verwerken(datastream: list[str]) -> tuple[list[int], list[list[int]]]:
+    """
+    Functie om de data te verwerken in twee losse lijsten.
+    """
     volgorde: list[list[str]] = []
     updates: list[list[str]] = []
 
@@ -17,6 +20,9 @@ def data_verwerken(datastream: list[str]) -> tuple[list[int], list[list[int]]]:
 
 
 def is_gesorteerd(volgorde, update):
+    """
+    Kijkt of de updatelijst gesoorteerd is aan de hand van de volgorde lijst
+    """
     kloppend: bool = True
     for eerst, laatst in volgorde:
         if eerst not in update or laatst not in update:
@@ -30,6 +36,9 @@ def is_gesorteerd(volgorde, update):
 
 
 def sorteer(volgorde, update):
+    """
+    Sorteert de update lijst aan de hand van de bepaalde volgorde. Moet in meeste gevallen meerdere keren worden uitgevoerd.
+    """
     for eerst, laatst in volgorde:
         if eerst not in update or laatst not in update:
             continue
@@ -40,9 +49,13 @@ def sorteer(volgorde, update):
             update[update.index(laatst)] = wissel
     return update
 
+
 def AoC_05_2024(datastream: list[str]) -> tuple[int, int]:
     antwoord1: int = 0
     antwoord2: int = 0
+
+    volgorde: list[list[int]]
+    updates: list[list[int]]
     volgorde, updates = data_verwerken(datastream)
     
     for update in updates:
