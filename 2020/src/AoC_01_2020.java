@@ -4,28 +4,36 @@ import java.util.List;
 public class AoC_01_2020 {
     public static void main(String[] args) throws IOException {
         List<String> input = Util.readInput("inputs/AoC_01_2020.txt");
-        int comparator;
+        int comparator1;
+        int comparator2;
         int base;
         int answer1 = 0;
-        boolean break_loop = false;
+        int answer2 = 0;
 
         for (int i = 0; i < input.size(); i++){
-            if (break_loop) break;
             base = Integer.parseInt(input.get(i));
 
             for (int j = i; j < input.size(); j ++){
                 if (i == j) continue;
-                if (break_loop) break;
 
-                comparator = Integer.parseInt(input.get(j));
+                comparator1 = Integer.parseInt(input.get(j));
 
-                if (base + comparator == 2020) {
-                    answer1 = base * comparator;
-                    break_loop = true;
+                if (base + comparator1 == 2020) {
+                    answer1 = base * comparator1;
+                }
+
+                for (int k = j; k < input.size(); k ++){
+                    if (k == j) continue;
+
+                    comparator2 = Integer.parseInt(input.get(k));
+
+                    if (base + comparator1 + comparator2 == 2020) {
+                        answer2 = base * comparator1 * comparator2;
+                    }
                 }
             }
         }
 
-        System.out.println(answer1);
+        System.out.println(answer1 + ", " + answer2);
     }
 }
