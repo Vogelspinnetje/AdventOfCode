@@ -5,16 +5,47 @@ def verwerk_data(datastream: list[str]) -> tuple[int, list[int]]:
     
     return uitkomst, sommen
 
+
 def AoC_07_2024(datastream: list[str]) -> tuple[int, int]:
     antwoord1: int = 0
     antwoord2: int = 0
     
     for sommen in datastream:
         uitkomst, getallen = verwerk_data(sommen)
-        if getallen[0] + getallen[1] == uitkomst:
-            print("ayo")
-        if getallen[0] * getallen[1] == uitkomst:
-            print("ayo")
+        
+        def part1(index, acc):
+            if index == len(getallen):
+                return acc == uitkomst
+
+            n = getallen[index]
+
+            if part1(index + 1, acc + n):
+                return True
+            if part1(index + 1, acc * n):
+                return True
+
+            return False
+            
+        if part1(1, getallen[0]):
+            antwoord1 += uitkomst
+            
+        def part2(index, acc):
+            if index == len(getallen):
+                return acc == uitkomst
+
+            n = getallen[index]
+
+            if part2(index + 1, acc + n):
+                return True
+            if part2(index + 1, acc * n):
+                return True
+            if part2(index + 1, int(str(acc)+str(n))):
+                return True
+
+            return False
+        
+        if part2(1, getallen[0]):
+            antwoord2 += uitkomst
 
     return antwoord1,antwoord2
 
