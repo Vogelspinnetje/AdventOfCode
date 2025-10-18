@@ -6,7 +6,6 @@ My Advent of Code solutions
 - 2017: JavaScript
 - 2018: -
 - 2019: Python
-- 2020: Java
 - 2021: -
 - 2022: -
 - 2023: Python
