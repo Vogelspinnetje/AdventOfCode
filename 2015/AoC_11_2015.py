@@ -1,48 +1,67 @@
-def AoC_11_2015(datastream: list[str]) -> str:
-    alfabet_list = list("abcdefghijklmnopqrstuvwxyza")
-    alfabet = {}
-    for items in range(len(alfabet_list)-1):
-        alfabet[alfabet_list[items]] = alfabet_list[items+1]
+def increment_password(pw: str) -> str:
+    pw_list: list = list(pw)
+    position: int = len(pw_list) - 1
 
-    nieuw_wachtwoord = ""
-    requirements = [False, True, False, False]
-    aanpas_index = -1
-
-    while not requirements[-1]:
-        if datastream[aanpas_index] == "z":
-            datastream[aanpas_index] = alfabet[datastream[aanpas_index]]
+    while position >= 0:
+        if pw_list[position] == 'z':
+            pw_list[position] = 'a'
+            position -= 1
         else:
-            datastream[aanpas_index] = alfabet[datastream[aanpas_index]]
+            pw_list[position] = chr(ord(pw_list[position]) + 1)
+            break
 
-        mogelijk_wachtwoord = "".join(datastream)
+    return ''.join(pw_list)
 
-        for letters in range(len(alfabet)):
-            sequentie = alfabet[letters:letters+3]
-            if (len("".join(sequentie)) == 3 and "".join(sequentie) in
-                    mogelijk_wachtwoord):
-                requirements[0] = True
-                break
-        for verboden in ["i", "o", "l"]:
-            if verboden in mogelijk_wachtwoord:
-                requirements[1] = False
-                break
-        vorige = ""
-        aantal_dubbel = 0
-        for karakters in datastream:
-            if vorige == karakters:
-                aantal_dubbel +=1
-            if aantal_dubbel == 2:
-                requirements[2] = True
-                break
-            vorige = karakters
 
-        if requirements[:3] == [True, True, True]:
-            requirements[-1] = True
+def req1(pw: str) -> bool:
+    alphabet: str = "abcdefghijklmnopqrstuvwxyz"
+    
+    for position in range(len(pw)-2):
+        window: str = f"{pw[position]}{pw[position+1]}{pw[position+2]}"
+        if window in alphabet:
+            return True
 
-    return ""
+    return False
+
+def req2(pw: str) -> bool:
+    if "i" in pw or "l" in pw or "o" in pw:
+        return False
+    else:
+        return True
+    
+def req3(pw: str) -> bool:
+    doubles: int = 0
+    forbidden: str = ""
+    
+    for position in range(len(pw)-1):
+        if pw[position] == pw[position+1] and forbidden != pw[position]:
+            doubles += 1
+            forbidden = pw[position]
+        if doubles >= 2:
+            return True
+        
+    return False
+
+
+def AoC_11_2015(datastream: list[str]) -> tuple[int, int]:
+    antwoord1: str = ""
+    antwoord2: list[str] = []
+    
+    datastream = datastream[0]
+    
+    while len(antwoord2) < 2:
+        if req1(datastream) and req2(datastream) and req3(datastream):
+            antwoord2.append(datastream)
+            
+        datastream = increment_password(datastream)
+
+    antwoord1 = antwoord2[0]
+    antwoord2 = antwoord2[1]
+    
+    return antwoord1,antwoord2
 
 if __name__ == "__main__":
     with open("2015/AoC_11_2015.txt", "r") as fh:
-        invoer = fh.read().strip()
+        invoer: list[str] = [regels.strip() for regels in fh]
 
-    print(AoC_11_2015(list(invoer)))
+    print(AoC_11_2015(invoer))
